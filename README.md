@@ -25,7 +25,7 @@ A simple maze game where the player navigates through a randomly generated maze 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/maze-game.git
+   git clone https://github.com/casparjones/maze.git
    ```
 
 2. Open the `index.html` file in your web browser.
