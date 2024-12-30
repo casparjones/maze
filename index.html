@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024, initial-scale=1.0">
+    <title>Maze</title>
+    <link rel="stylesheet" href="style/game.css">
+</head>
+<body>
+    
+    <div class="container" style="text-align: center;">
+        <h1>Find the Way out of the Maze</h1>
+        <div id="win-place">Player search the way...</div>
+        <div>Time: <span id="seconds">0</span> seconds</div>
+        <div style="width: 600px; height: 600px; position: relative; margin: auto;">
+            <div id="start">START =></div>
+            <canvas id="mazeCanvas"></canvas>
+            <canvas id="fogCanvas"></canvas>
+            <div id="target"><= TARGET</div>
+        </div>
+    </div>
+
+    <script src="js/maze.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

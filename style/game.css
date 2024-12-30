@@ -1,0 +1,17 @@
+#fogCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#start {
+    position: absolute;
+    left: -80px;
+}
+
+#target {
+    width: 120px;
+    position: absolute;
+    right: -110px;
+    top: 580px
+}
