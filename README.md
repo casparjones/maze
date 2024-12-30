@@ -18,8 +18,11 @@ A simple maze game where the player navigates through a randomly generated maze 
 4. Your time is displayed at the top of the page.
 
 ## Demo
+## Demo
+[Click here to try the demo](https://casparjones.github.io/maze/)
 
 ![Maze Game Screenshot](screenshot.png)
+
 
 ## Installation
 
