@@ -16,26 +16,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const maze = new Maze(mazeCanvasId, 30, 30, cellSize);
   const player = new Player(fogCanvasId, maze, cellSize);
 
-  let timeout = 0;
   let oldDirection = null;
-  let directionMulti = 1;
+  let directionMulti = 0;
+  let moveInterval = null;
+  
   joystick.on('move', (evt, data) => {
       if (data.direction) {
-        if(oldDirection == data.direction.angle) {
-          directionMulti = directionMulti + 10;
-          if(directionMulti > 100) directionMulti = 100;
-        } else {
-          directionMulti = 0;
-        }
-        
-        if(timeout) clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          player.handleJoystickMovement(data.direction.angle);
-          timeout = 0;
-          oldDirection = data.direction.angle;
-        }, 100 - directionMulti);
+          if (oldDirection === data.direction.angle) {
+              directionMulti += 10;
+              if (directionMulti > 100) directionMulti = 100;
+          } else {
+              directionMulti = 0; // Reset, wenn die Richtung wechselt
+              oldDirection = data.direction.angle;
+          }
+  
+          if (!moveInterval) {
+              // Bewegung starten
+              moveInterval = setInterval(() => {
+                  player.handleJoystickMovement(data.direction.angle);
+              }, 100 - directionMulti);
+          }
       }
   });
+  
+  joystick.on('end', () => {
+      // Stoppe die Bewegung, wenn der Joystick losgelassen wird
+      if (moveInterval) {
+          clearInterval(moveInterval);
+          moveInterval = null;
+      }
+      directionMulti = 0; // Geschwindigkeit zurücksetzen
+      oldDirection = null;
+  });
+  
 
   // Update Canvas size on window resize
   window.addEventListener('resize', () => {
