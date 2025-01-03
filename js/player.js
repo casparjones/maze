@@ -91,11 +91,30 @@ class Player {
       }
     }
 
+    updateCanvasSize() {
+        this.canvas.width = this.maze.canvas.width;
+        this.canvas.height = this.maze.canvas.height;
+        this.render();
+    }
+  
+
     win() {
       this.won = true;
       clearInterval(this.counterInterval);
       const timeTaken = ((Date.now() - this.startTime) / 1000).toFixed(2);
       document.getElementById("win-place").innerHTML = `WON! Time: ${timeTaken} seconds`;
+    }
+
+    handleJoystickMovement(angle) {
+      if (angle === "up") {
+        this.movePlayer(-1, 0);
+      } else if (angle === "down") {
+        this.movePlayer(1, 0);
+      } else if (angle === "left") {
+        this.movePlayer(0, -1);
+      } else if (angle === "right") {
+        this.movePlayer(0, 1);
+      }
     }
 
     addControls() {

@@ -14,6 +14,14 @@ class Maze {
       this.generateGrid();
       this.generateMaze();
     }
+
+    updateCanvasSize(newCellSize) {
+        this.cellSize = newCellSize;
+        this.canvas.width = this.cols * this.cellSize;
+        this.canvas.height = this.rows * this.cellSize;
+        this.drawMaze();
+    }
+ 
   
     initCanvas() {
       this.canvas.width = this.cols * this.cellSize;
