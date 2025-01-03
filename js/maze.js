@@ -105,7 +105,7 @@ class Maze {
       this.highlightCell(this.end, "red");
     }
   
-    getNeighbors(cell) {
+    getNeighbors(cell, visited) {
       const neighbors = [];
       const { row, col } = cell;
   
@@ -113,7 +113,8 @@ class Maze {
       if (row < this.rows - 1) neighbors.push(this.grid[row + 1][col]);
       if (col > 0) neighbors.push(this.grid[row][col - 1]);
       if (col < this.cols - 1) neighbors.push(this.grid[row][col + 1]);
-  
+
+      if(visited === true) return neighbors;
       return neighbors.filter((neighbor) => !neighbor.visited);
     }
   
@@ -138,9 +139,21 @@ class Maze {
       }
     }
   
+    setLevel(level) {
+      for(let i = 0; i < level; i++) {
+        for(let j = 0; j < this.grid.length; j++) {
+          let x = parseInt(Math.random() * this.grid.length);
+          let cell = this.grid[j][x];
+          const neighbors = this.getNeighbors(cell, true);
+          const nextCell = neighbors[Math.floor(Math.random() * neighbors.length)];
+          this.removeWalls(cell, nextCell);
+        }
+      }
+    }
+
     generateMaze() {
       while (true) {
-        const neighbors = this.getNeighbors(this.currentCell);
+        const neighbors = this.getNeighbors(this.currentCell, false);
   
         if (neighbors.length > 0) {
           const nextCell = neighbors[Math.floor(Math.random() * neighbors.length)];
@@ -155,6 +168,7 @@ class Maze {
         }
       }
   
+      this.setLevel(1);
       this.drawMaze();
     }
   }

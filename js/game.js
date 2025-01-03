@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  debugger;
   const joystick = nipplejs.create({
       zone: document.getElementById('joystickZone'), // Wo der Joystick erscheint
       mode: 'dynamic', // Dynamisch: Joystick erscheint bei Berührung
@@ -17,9 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const maze = new Maze(mazeCanvasId, 30, 30, cellSize);
   const player = new Player(fogCanvasId, maze, cellSize);
 
+  let timeout = 0;
+  let oldDirection = null;
+  let directionMulti = 1;
   joystick.on('move', (evt, data) => {
       if (data.direction) {
-        player.handleJoystickMovement(data.direction.angle);
+        if(oldDirection == data.direction.angle) {
+          directionMulti = directionMulti + 10;
+          if(directionMulti > 100) directionMulti = 100;
+        } else {
+          directionMulti = 0;
+        }
+        
+        if(timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          player.handleJoystickMovement(data.direction.angle);
+          timeout = 0;
+          oldDirection = data.direction.angle;
+        }, 100 - directionMulti);
       }
   });
 

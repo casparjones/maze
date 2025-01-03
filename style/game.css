@@ -4,6 +4,7 @@
 
 body {
     height: calc(var(--vh, 1vh) * 100);
+    overflow: hidden;
 }
 
 body {
@@ -31,13 +32,13 @@ body {
 
 #start {
     position: absolute;
-    left: -10%;
+    left: -10vh;
 }
 
 #target {
     position: absolute;
-    right: -10%;
-    top: calc(100% - 40px);
+    right: -11vh;
+    top: 71vh;
     width: 15vw;
     max-width: 120px;
     text-align: right;
@@ -47,10 +48,6 @@ body {
     #start,
     #target {
         display: none;
-    }
-
-    body {
-        overflow: hidden;
     }
 
     #joystickZone {
